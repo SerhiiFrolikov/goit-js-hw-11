@@ -31,9 +31,12 @@ searchForm.addEventListener('submit', onSubmitForm);
 async function onSubmitForm(evt) {
     evt.preventDefault()
     const formData = new FormData(evt.currentTarget);
-    searchQuery = formData.get('searchQuery');
-    if (searchQuery === '') {
-        galleryList.innerHTML = '';
+    searchQuery = formData.get('searchQuery').trim();
+  if (searchQuery === '') {
+      Notify.warning('Please, fill the field!');
+    galleryList.innerHTML = '';
+    loadMoreButton.hidden = true;
+      return;
     }
     currentPage = 1;
     
